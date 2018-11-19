@@ -1,6 +1,6 @@
 {
   "base": {
-    "max_iter": 20,
+    "max_iter": 400,
     "num_threads": 4,
     "calc_rmse": true
   },
@@ -8,18 +8,19 @@
   "model": {
     "dimension": 40,
     "step_size": 0.005,
-    "regularization_cost_for_P": 0.003,
-    "regularization_cost_for_Q": 0.003,
+    "regularization_cost_for_P": 0.03,
+    "regularization_cost_for_Q": 0.03,
     "read_model": false,
-    "write_model": true,
-    "output_path": "./model.bin"
+    "write_model": false,
+    "output_path": "./mv1mtr91.bin"
   },
 
   "data": {
     "num_user_blocks": 4,
     "num_item_blocks": 4,
-    "input_path": "./input/testdata",
-    "output_path": "./input/testdata.bin",
+    "input_path": "./input/mv1mtr91.txt",
+    "test_path": "./input/mv1mte91.txt",
+    "output_path": "./input/mv1mtr91.bin",
     "randomize": true
   }
 }

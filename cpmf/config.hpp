@@ -30,7 +30,7 @@ struct DataParams {
 
   bool randomize;
   int num_user_blocks, num_item_blocks;
-  std::string input_path, output_path;
+  std::string input_path, test_path, output_path;
 };
 
 struct Config {

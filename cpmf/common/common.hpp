@@ -35,6 +35,8 @@ class Matrix {
   long num_ratings;
   int num_users, num_items, num_user_blocks, num_item_blocks;
   std::vector<Block> blocks;
+  std::vector<int> copy_user_mapping;
+  std::vector<int> copy_item_mapping;
 
  private:
   void initialize_blocks();
@@ -56,6 +58,7 @@ class Model {
 
   inline void sgd(const int &block_id, const Block &block);
   float calc_rmse();
+  void calc_test_rmse(const std::shared_ptr<cpmf::common::Matrix> R, const std::string &test_path);
   void write_to_disk();
   void show_info(const std::string &message);
 

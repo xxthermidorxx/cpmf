@@ -69,6 +69,8 @@ void Matrix::assign_nodes(std::vector<Node> * temp_nodes,
   const int blk_u_len = num_users / num_user_blocks + 1;
   const int blk_i_len = num_items / num_item_blocks + 1;
 
+  copy_user_mapping = user_mapping;
+  copy_item_mapping = item_mapping;
   for (auto node_itr = temp_nodes->begin(), node_itr_end = temp_nodes->end();
         node_itr != node_itr_end; ++node_itr) {
     node_itr->user_id = user_mapping[node_itr->orig_user_id - 1];

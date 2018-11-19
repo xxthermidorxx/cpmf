@@ -5,7 +5,8 @@ namespace parallel {
 
 void train(const std::shared_ptr<cpmf::common::Matrix> R,
            std::shared_ptr<cpmf::common::Model> model,
-           const cpmf::BaseParams &base_params) {
+           const cpmf::BaseParams &base_params,
+           const cpmf::DataParams &data_params) {
   cpmf::utils::Timer timer;
   cpmf::utils::Logger logger;
   Scheduler scheduler(R->num_user_blocks, R->num_item_blocks,
@@ -34,6 +35,8 @@ void train(const std::shared_ptr<cpmf::common::Matrix> R,
   }
   timer.stop("traininig finishes.");
   scheduler.terminate();
+  //testing
+  model->calc_test_rmse(R, data_params.test_path);
 }
 
 } // namespace parallel

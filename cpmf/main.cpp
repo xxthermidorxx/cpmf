@@ -71,6 +71,8 @@ std::unique_ptr<cpmf::Config> parse_config_json(std::ifstream &conf_ifs) {
           dp.num_item_blocks = static_cast<float>( val.get<double>() );
         } else if (key == "input_path") {
           dp.input_path = val.get<std::string>();
+        } else if (key == "test_path") {
+          dp.test_path = val.get<std::string>();
         } else if (key == "output_path") {
           dp.output_path = val.get<std::string>();
         } else if (key == "randomize") {
@@ -133,7 +135,8 @@ int main(int argc, char *argv[]) {
   model->show_info("==== MODEL INFO ====");
 
   // begin training
-  cpmf::parallel::train(R, model, config->base_params);
+  //cpmf::parallel::train(R, model, config->base_params);
+  cpmf::parallel::train(R, model, config->base_params, config->data_params);
 
   // write model to disk
   timer.start("Writing model...");

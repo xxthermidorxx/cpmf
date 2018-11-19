@@ -36,6 +36,30 @@ float Model::calc_rmse() {
   return std::sqrt(sum/num_ratings);
 }
 
+void Model::calc_test_rmse(const std::shared_ptr<cpmf::common::Matrix> R, const std::string &test_path){
+  
+  std::ifstream test_ifs(test_path.c_str());
+  if (test_ifs.fail()) {
+    std::cerr << "FileReadError: Cannot open " << test_path << std::endl;
+  }
+  std::string line_buf;
+  int num_ratings = 0;
+  float test_rmse = 0.0;
+  const int dim = params_.dim;
+  while (getline(test_ifs, line_buf)) {
+    int user_id, item_id;
+    float rating;
+    sscanf(line_buf.data(),
+           "%d %d %f\n", &user_id, &item_id, &rating);
+    ++num_ratings;
+    float * p = P.get() + (R->copy_user_mapping[user_id-1]-1) * dim;
+    float * q = Q.get() + (R->copy_item_mapping[item_id-1]-1) * dim;
+    float error = rating - std::inner_product(p, p+dim, q, 0.0);
+    test_rmse += error * error;
+  }
+  std::cerr << "Test RMSE: " << std::sqrt(test_rmse/num_ratings) << std::endl;
+}
+
 void Model::fill_with_random_value(std::unique_ptr<float> &uniq_p,
                                    const int &size) {
   std::random_device rd;

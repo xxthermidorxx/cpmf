@@ -19,7 +19,8 @@ namespace parallel {
 
 void train(const std::shared_ptr<cpmf::common::Matrix> R,
            std::shared_ptr<cpmf::common::Model> model,
-           const cpmf::BaseParams &base_params);
+           const cpmf::BaseParams &base_params,
+	   const cpmf::DataParams &data_params);
 
 } // namespace parallel
 } // namespace cpmf
